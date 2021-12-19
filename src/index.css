@@ -1,0 +1,28 @@
+*{
+    transition: ease-in-out 0.2s;
+}
+
+body{
+    background-image: url("./static/background.svg");
+    object-fit: cover;
+}
+
+.state {
+    fill: #9865ff;
+    /* #f9ff66 */
+    stroke: #ffffff;  
+}
+
+.state:hover {
+    fill: #fd545c!important;
+    opacity: 1.0!important;
+    /* stroke: red; */
+    z-index: 9999!important;
+    shadow: 0 0 20px rgba(133, 133, 133,0.5);
+}
+
+.usMap{
+    width:75vw;
+    margin-top: 3vh;
+    margin-left: 5vh;
+}
