@@ -1,5 +1,6 @@
 import React from 'react';
 import Map from './Map';
+import Events from './Events';
 import SelectBar from './SelectBar';
 import * as d3 from "d3"
 // import DataProcess from './MapCharts';
@@ -42,14 +43,20 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <div className="Map-container">
         {loading && <div>loading</div>}
         {!loading && <Map 
         data1={data1}
         data2={data2}
         data3={data3}
         data4={data4}
+        // className="Map"
           />}
+        <Events 
+        // className="Map"
+        />
         <SelectBar />
+        </div>
       </header>
     </div>
   );

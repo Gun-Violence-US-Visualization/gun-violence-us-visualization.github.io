@@ -7,10 +7,19 @@ body{
     object-fit: cover;
 }
 
+.Map-container{
+    height: 80vh;
+
+}
+/* .Map{
+    height: 80vh;
+} */
+
 .state {
     fill: #9865ff;
     /* #f9ff66 */
     stroke: #ffffff;  
+    stroke-width:0.5
 }
 
 .state:hover {
@@ -21,8 +30,31 @@ body{
     shadow: 0 0 20px rgba(133, 133, 133,0.5);
 }
 
-.usMap{
-    width:75vw;
-    margin-top: 3vh;
-    margin-left: 5vh;
+.Map{
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    left:50%;
+    transform: translate(-50%)
+}
+
+/* .Events {
+    position: absolute;
+    top: 0;
+    height: 90vh;
+} */
+
+.event{
+    cursor: pointer;
+    fill: #ff65a0;
+    opacity: 0.5;
+    stroke: #ffffff;
+    stroke-width:0.5
+
+}
+
+.event:hover{
+    opacity: 1.0;
+    radius: 5px;
+    /* transform: scale(2.0) */
 }
