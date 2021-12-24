@@ -1,5 +1,5 @@
 *{
-    transition: ease-in-out 0.2s;
+    
 }
 
 body{
@@ -8,7 +8,7 @@ body{
 }
 
 .Map-container{
-    height: 80vh;
+    height: 100vh;
 
 }
 /* .Map{
@@ -19,7 +19,8 @@ body{
     fill: #9865ff;
     /* #f9ff66 */
     stroke: #ffffff;  
-    stroke-width:0.5
+    stroke-width:0.5;
+    transition: ease-in-out 0.2s;
 }
 
 .state:hover {
@@ -27,15 +28,16 @@ body{
     opacity: 1.0!important;
     /* stroke: red; */
     z-index: 9999!important;
-    shadow: 0 0 20px rgba(133, 133, 133,0.5);
+    /* shadow: 0 0 20px rgba(133, 133, 133,0.5); */
+    transition: ease-in-out 0.2s;
 }
 
 .Map{
     position: absolute;
     top: 0;
     height: 100vh;
-    left:50%;
-    transform: translate(-50%)
+    /* left:50%; */
+    /* transform: translate(-50%) */
 }
 
 /* .Events {
@@ -47,14 +49,29 @@ body{
 .event{
     cursor: pointer;
     fill: #ff65a0;
-    opacity: 0.5;
+    
     stroke: #ffffff;
-    stroke-width:0.5
+    stroke-width:0.5;
+    opacity: 0.4;
+    transition: ease-in-out 0.2s;
 
 }
 
 .event:hover{
     opacity: 1.0;
     radius: 5px;
+    transition: ease-in-out 0.2s;
     /* transform: scale(2.0) */
+}
+
+button{
+    width:10vw;
+    height:10vh;
+}
+
+.hehe{
+    /* position: absolute; */
+    /* top:150vh; */
+    z-index: 99999;
+    /* margin:280px; */
 }

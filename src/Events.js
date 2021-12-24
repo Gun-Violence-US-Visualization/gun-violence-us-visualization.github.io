@@ -4,51 +4,51 @@ import { useD3 } from './hooks/useD3';
 import * as d3 from "d3"
 import { feature } from "topojson-client"
 
-const projection = geoAlbersUsa()
-//   .scale(1250)
-  .translate([ 960 / 2, 600 / 2 ])
-
-
-
 function Events(data) {
+
+  const ref = React.useRef(null);
+
   const [eventsData, setEventsData] = useState([]);
-  // console.log(data)
+//   const { list } = props;
+//   const data = props
 
   useEffect(() => {
     (async () => {
-      const res = await fetch('./mass_shooting_events_stanford_msa_release.geojson')
+      const res = await fetch('./cases.geojson')
       const eventsDataCombine = await res.json();
-      const eventsData = eventsDataCombine.features
+      const eventsData = eventsDataCombine.features;
       setEventsData(eventsData);
-    })();
-  }, []);
 
-  console.log(eventsData)
-//   console.log(eventsData.features)
+      const projection = geoAlbersUsa()
+      .scale(data.scaleSend)
+      // .scale(1200)
+      .translate([ 960 / 2, 600 / 2 ])
 
-  const ref = useD3(
-    (svg) => { 
-      svg
+    
+
+    const chartEl = d3.select(ref.current);
+    chartEl.selectAll("*").remove();
+
+    const chart = chartEl.append("g")
+
+    chart
         .selectAll(".points")
         .data(eventsData).enter()
         .append("circle")
         .attr("class", "event")
         .attr("r", 
             function (d) { 
-                return 3
+                console.log(d)
+                    return 4.0
+                // }
             })
-        // .style(
-        //     "fill","red"
-        // )
         .attr("transform", 
         
             function(d) { 
-            // setInterval(() =>
-                console.log(d)
-                 
-            // ,300)
+              console.log(d)
             return "translate(" + projection(d.geometry.coordinates) + ")"
         })
+      })();
       },[eventsData.length]
   )
   
