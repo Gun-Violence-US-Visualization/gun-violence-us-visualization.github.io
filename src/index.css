@@ -1,10 +1,22 @@
+
+
+/* @font-face {
+    font-family: 'futura-bold'; 
+     src: url(./static/Futura.ttc);
+} */
+
 *{
-    
+    font-family:'futura'
 }
 
 body{
     background-image: url("./static/background.svg");
     object-fit: cover;
+}
+
+.Big-title{
+    font-size:48pt;
+    font-weight: bold;
 }
 
 .Map-container{
@@ -40,26 +52,23 @@ body{
     /* transform: translate(-50%) */
 }
 
-/* .Events {
-    position: absolute;
-    top: 0;
-    height: 90vh;
-} */
 
-.event{
+.case{
     cursor: pointer;
-    fill: #ff65a0;
+    fill: #ff822e;
     
-    stroke: #ffffff;
-    stroke-width:0.5;
-    opacity: 0.4;
+    /* stroke: #ffffff; */
+    /* stroke-width:0.5; */
+    opacity: 0.8;
     transition: ease-in-out 0.2s;
 
 }
 
-.event:hover{
+.case:hover{
     opacity: 1.0;
-    radius: 5px;
+    /* radius: 5px; */
+    stroke: #ffffff; 
+    stroke-width:1.0;
     transition: ease-in-out 0.2s;
     /* transform: scale(2.0) */
 }
@@ -67,6 +76,15 @@ body{
 button{
     width:10vw;
     height:10vh;
+}
+
+.caseTip{
+    background-color: #535353; 
+    opacity: 0.7;
+    padding: 10px;
+    border-radius: 10.0px;
+    font-size: 12pt;
+    color: #ffffff;
 }
 
 .hehe{

@@ -23,9 +23,7 @@ function Events(data) {
       .scale(data.scaleSend)
       // .scale(1200)
       .translate([ 960 / 2, 600 / 2 ])
-
-    
-
+      
     const chartEl = d3.select(ref.current);
     chartEl.selectAll("*").remove();
 
@@ -43,7 +41,6 @@ function Events(data) {
                 // }
             })
         .attr("transform", 
-        
             function(d) { 
               console.log(d)
             return "translate(" + projection(d.geometry.coordinates) + ")"
