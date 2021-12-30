@@ -68,6 +68,21 @@ function ControlBar(props) {
                 </div>
             </div>
             <div className="block">
+                <div>
+                    <input type="checkbox" id="find" />
+                    <label htmlFor="find">
+                        <div
+                            className={"title-button"}
+                            onClick={props.findnear}
+                        >
+                            <p>FIND</p >
+                        </div>
+                    </label>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div className="block">
                 <div className="range">
                     {/* <input type="range" className="" onChange={props.scaleChange} /> */}
                     <button className="scaleSmall scale" onClick={props.scaleSmall}>-</button>

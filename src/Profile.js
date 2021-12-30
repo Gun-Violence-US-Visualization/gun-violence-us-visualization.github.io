@@ -72,7 +72,7 @@ function Profile(data) {
             .transition()
             .duration(200)
             .style("fill", color(selected_specie))
-            .attr("r", 7)
+            .attr("r", 5)
         }
 
         // Highlight the specie that is hovered
@@ -87,7 +87,7 @@ function Profile(data) {
             .transition()
             .duration(200)
             .style("fill", d => color(d.race_sex))
-            .attr("r", 5)
+            .attr("r", 3)
         }
 
         const mousemove = function (event, d) {
@@ -106,7 +106,7 @@ function Profile(data) {
           .attr("class", function (d) { console.log(`HIHI${d.race_sex}`); return "dot " + d.race_sex })
           .attr("cx", function (d) { console.log(d.age); return x(d.age); })
           .attr("cy", function (d) { console.log(d.kill_injure); return y(d.kill_injure); })
-          .attr("r", 5)
+          .attr("r", 3)
           .style("fill", function (d) { return color(d.race_sex); })
           .on("mouseover", highlight)
           .on("mouseleave", doNotHighlight)

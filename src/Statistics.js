@@ -136,7 +136,7 @@ function Statistics(data) {
   )
 
   return (
-    <svg viewBox="0 0 960 600" className="usStatistics" ref={ref}></svg>      //渲染了这个东西出来
+    <div viewBox="0 0 960 600" className="usStatistics" ref={ref}></div>      //渲染了这个东西出来
   )
 }
 

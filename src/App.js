@@ -4,8 +4,7 @@ import Mouse from './Mouse'
 import Title from './Title'
 import ControlBar from './ControlBar'
 import SubPage from './SubPage'
-// import Statistics from './Statistics'
-import Profile from './Profile'
+
 
 function App() {
 
@@ -13,6 +12,7 @@ function App() {
   const [data2, setData2] = React.useState([]);
   const [data3, setData3] = React.useState([]);
   const [data4, setData4] = React.useState([]);
+  const [data5, setData5] = React.useState([]);
 
   // const [select, setSelect] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -47,6 +47,11 @@ function App() {
       // setData4(data4);
 
       // setSelect([true, true, true, true])
+
+      const res5 = await fetch('./univercity.json')
+      const data5Combine = await res5.json();
+      const data5 = data5Combine.features;
+      setData5(data5);
 
       setSelectCases(true)
       setSelectPolicy(true)
@@ -133,6 +138,35 @@ function App() {
     }
   }
 
+  //计算两点（经纬度坐标）相隔距离，返回距离单位为公里（KM）
+  function GetDistance( lat1,  lng1,  lat2,  lng2){
+    var radLat1 = lat1*Math.PI / 180.0;
+    var radLat2 = lat2*Math.PI / 180.0;
+    var a = radLat1 - radLat2;
+    var  b = lng1*Math.PI / 180.0 - lng2*Math.PI / 180.0;
+    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) + Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+    s = s *6378.137 ;// EARTH_RADIUS
+    s = Math.round(s * 10000) / 10000;
+    return s;
+  }
+
+
+  const findnear = () => {
+    var u="Princeton University"
+    var result = new Array();
+    for(var i=0;i<data5.length;i++){
+      if(data5[i].properties.name == u){
+        for(var j=0;j<data3.length;j++){
+          if(GetDistance(data5[i].geometry.coordinates[1],data5[i].geometry.coordinates[0],data3[j].geometry.coordinates[1],data3[j].geometry.coordinates[0])<50){
+            result.push(data3[j].id)
+          }
+        }
+      }
+    }
+    console.log(result)
+    return result;
+  }
+
   console.log(`AppTrigger`)
   // console.log(select[0])
 
@@ -181,14 +215,21 @@ function App() {
           scaleBig={scaleBig}
           scaleSmall={scaleSmall}
           scaleOrigin={scaleOrigin}
+          data5={data5}
+          findnear={findnear}
         />
 
         {/* <Statistics/> */}
-        <Profile />
+        {/* <Profile /> */}
         
 
         
-          {selectCases && !selectPolicy && !selectGunRate && !selectVote && <SubPage />}
+         <SubPage
+          selectCases={selectCases}
+          selectPolicy={selectPolicy}
+          selectGunRate={selectGunRate}
+          selectVote={selectVote}
+           />
         {/* </div> */}
 
 
