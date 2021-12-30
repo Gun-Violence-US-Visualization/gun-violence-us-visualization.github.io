@@ -4,6 +4,8 @@ import Mouse from './Mouse'
 import Title from './Title'
 import ControlBar from './ControlBar'
 import SubPage from './SubPage'
+// import Statistics from './Statistics'
+import Profile from './Profile'
 
 function App() {
 
@@ -20,8 +22,8 @@ function App() {
 
   const [selectCases, setSelectCases] = React.useState(true);
   const [selectPolicy, setSelectPolicy] = React.useState(true);
-  const [selectGunRate, setSelectGunRate] = React.useState(true);
-  const [selectVote, setSelectVote] = React.useState(true);
+  const [selectGunRate, setSelectGunRate] = React.useState(false);
+  const [selectVote, setSelectVote] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -48,8 +50,8 @@ function App() {
 
       setSelectCases(true)
       setSelectPolicy(true)
-      setSelectGunRate(true)
-      setSelectVote(true)
+      setSelectGunRate(false)
+      setSelectVote(false)
 
       setLoading(false);
 
@@ -64,7 +66,7 @@ function App() {
   const scaleBig = () => {
 
     // let scale = 900+(event.target.value-50)*15;
-    setScaleData(1200);
+    setScaleData(1300);
     setPace(1.5);
     console.log(scaleData)
     setOffset([250, 350])
@@ -94,16 +96,24 @@ function App() {
   const selectChangeGunRate = () => {
     if (selectGunRate) {
       setSelectGunRate(false)
+      // setSelectPolicy(true)
     } else {
       setSelectGunRate(true)
+      if(setSelectPolicy){
+        setSelectPolicy(false)
+      }
     }
   }
 
   const selectChangePolicy = () => {
     if (selectPolicy) {
       setSelectPolicy(false)
+      // setSelectGunRate(true)
     } else {
       setSelectPolicy(true)
+      if (selectGunRate){
+      setSelectGunRate(false)
+      }
     }
   }
 
@@ -172,6 +182,9 @@ function App() {
           scaleSmall={scaleSmall}
           scaleOrigin={scaleOrigin}
         />
+
+        {/* <Statistics/> */}
+        <Profile />
         
 
         

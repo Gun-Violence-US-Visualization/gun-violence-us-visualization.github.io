@@ -8,8 +8,7 @@ function ControlBar(props) {
             </div> */}
             <div className="block">
                 <div>
-
-                    <input type="checkbox" id="cases" />
+                    <input type="checkbox" id="cases" checked={props.selectCases} />
                     <label htmlFor="cases">
                         <div
                             className={"title-button"}
@@ -18,16 +17,14 @@ function ControlBar(props) {
                             <p>CASES</p>
                         </div>
                     </label>
-
                 </div>
                 <div>
-
                 </div>
             </div>
             <div className="block">
                 <div>
 
-                    <input type="checkbox" id="policy" />
+                    <input type="checkbox" id="policy" checked={props.selectPolicy}/>
                     <label htmlFor="policy">
                         <div
                             className={"title-button"}
@@ -36,16 +33,13 @@ function ControlBar(props) {
                             <p>POLICY</p>
                         </div>
                     </label>
-
                 </div>
                 <div>
-
                 </div>
             </div>
             <div className="block">
                 <div>
-
-                    <input type="checkbox" id="gunRate" />
+                    <input type="checkbox" id="gunRate"  checked={props.selectGunRate}/>
                     <label htmlFor="gunRate">
                         <div
                             className={"title-button"}
@@ -54,17 +48,13 @@ function ControlBar(props) {
                             <p>GUN RATE</p>
                         </div>
                     </label>
-
                 </div>
                 <div>
-
                 </div>
             </div>
-
             <div className="block">
                 <div>
-
-                    <input type="checkbox" id="vote" />
+                    <input type="checkbox" id="vote" checked={props.selectVote} />
                     <label htmlFor="vote">
                         <div
                             className={"title-button"}
@@ -73,25 +63,22 @@ function ControlBar(props) {
                             <p>VOTE</p>
                         </div>
                     </label>
-
                 </div>
                 <div>
-
                 </div>
-
             </div>
-
             <div className="block">
-            <div className={"range"}>
-                {/* <input type="range" className="" onChange={props.scaleChange} /> */}
-                <button className="" onClick={props.scaleSmall}/>
-                <button className="" onClick={props.scaleOrigin}/>
-                <button className="" onClick={props.scaleBig}/>
-            </div>
+                <div className="range">
+                    {/* <input type="range" className="" onChange={props.scaleChange} /> */}
+                    <button className="scaleSmall scale" onClick={props.scaleSmall}>-</button>
+                    <button className="scaleOrigin scale" onClick={props.scaleOrigin}>O</button>
+                    <button className="scaleBig scale" onClick={props.scaleBig}>+</button>
+                </div>
             </div>
 
         </div>
     )
 }
+
 
 export default ControlBar

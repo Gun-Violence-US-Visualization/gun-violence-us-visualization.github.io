@@ -7,9 +7,9 @@ function SubPage() {
     return (
         <div className="SubPageContainer" id="SBtest">
             
-            <div className="learn-more">
-            <ScrollToButton toId="SBtest">Scroll To Contact!</ScrollToButton>
-            </div>
+            {/* <div className="learn-more"> */}
+            <ScrollToButton buttonClass="learn-more" toId="SBtest">LEARN MORE</ScrollToButton>
+            {/* </div> */}
             <div>
                 HIHIHIHIHIHI
             </div>
