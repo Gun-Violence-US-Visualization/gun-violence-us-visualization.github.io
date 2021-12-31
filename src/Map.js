@@ -85,6 +85,20 @@ function Map(props) {
 
       chart.call(caseTip);
 
+      const universityTip = d3Tip()
+        .attr('class', 'd3-tip uni-tip')
+        .offset([-10, 0])
+        .html(function (d, data5) {
+            return (
+              "<div class='universityTip'>" +
+              "<span class='name'>" + data5.properties.name + "</span><br>"
+              + "</div>"
+            )
+          }
+        )
+
+      chart.call(universityTip);
+
       const stateTip = d3Tip()
         .html(function (d, statesData) {
           let state = ""
@@ -93,14 +107,55 @@ function Map(props) {
           } else {
             state = "District of Columbia"
           }
+          let vote = ""
+          let rate
+          let party = ""
+          if (props.data1[state].rate>0){
+            vote = "special-blue"
+            rate = props.data1[state].rate
+            party = 'DEMOCRACY'
+          }else{
+            vote = "special-red"
+            rate = -props.data1[state].rate
+            party = 'REPUBLICAN'
+          }
+
+
           return (
             "<div class='stateTip'>"
 
             + "<div class='state-detail'>"
 
-            + "<span class='state-name'>" + state.toUpperCase() + "</span>"
+            + "<span class='state-name'>" + state.toUpperCase() + "</span><br>"
 
-            + "<div class='detail-svg'></div>"
+            + "<div class='tip-spacer'></div>"
+
+          
+            + "<span class='kill-number "+ vote +" '>" +" " +rate + "%" + "</span>"+ "<span>"+party+"</span>"+"<br>"
+            // + "<span class='kill-number special'>" + props.data1[state].college + "</span>"+ "<span>COLLEGE</span><br>"
+
+            // + "<span class='state-name'>" + state.toUpperCase() + "</span>"
+            + "<div class='tip-spacer'></div>"
+
+            + "<div class='chart-bar-example policy-bar'>"+"</div>"+"<p class='bar-tip-example'>POLICY </p>"
+
+            + "<div class='chart-bar-example gunhold-bar'>"+"</div>"+"<p class='bar-tip-example'>GUNHOLD </p><br>"
+
+            // + "<div class='chart-bar-example vote-bar'>"+"</div>"+"<p class='bar-tip-example'>VOTE </p><br>"
+
+            + "<div class='chart-bar policy-bar'"+"style='width:" + (props.data1[state].total*11/100) + "vw'"+">"+"</div>"+"<p class='bar-tip'>" + props.data1[state].total + "</p><br>"
+
+            + "<div class='chart-bar gunhold-bar'"+"style='width:" + (props.data1[state].gunhold*11/0.6) + "vw'"+">"+"</div>"+"<p class='bar-tip'>" + props.data1[state].gunhold + "</p><br>"
+
+            // + "<div class='chart-bar injured-bar'"+"style='width:" + (statesSum[state].injured*12/1600) + "vw'"+">"+"</div>"+"<p class='bar-tip'>" + statesSum[state].injured + "</p><br>"
+
+            + "<div class='tip-spacer'></div>"
+
+            + "<div class='chart-bar-example num-bar'>"+"</div>"+"<p class='bar-tip-example'>CASES </p>"
+
+            + "<div class='chart-bar-example killed-bar'>"+"</div>"+"<p class='bar-tip-example'>KILLED </p>"
+
+            + "<div class='chart-bar-example injured-bar'>"+"</div>"+"<p class='bar-tip-example'>INJURED </p><br>"
 
             + "<div class='chart-bar num-bar'"+"style='width:" + (statesSum[state].num*12/370) + "vw'"+">"+"</div>"+"<p class='bar-tip'>" + statesSum[state].num + "</p><br>"
 
@@ -305,7 +360,7 @@ function Map(props) {
           .on('mouseover', caseTip.show)
           .on('mouseout', caseTip.hide)
       }
-
+      if (props.selectCity) {
       chart
         .selectAll(".city")
         .data(citiesData).enter()
@@ -334,11 +389,65 @@ function Map(props) {
           function (d) {
             return "translate(" + projection(d.geometry.coordinates) + ")"
           })
+    }
+    if (props.selectUni) {
 
+      chart
+        .selectAll(".university")
+        .data(props.data5).enter()
+        .append("ellipse")
+        .attr("class", "university")
+        .attr("rx",
+          function (d) {
+            return 1.5
+          })
+        
+        .attr("ry",
+          function (d) {
+            return 1.5
+          })
+        .attr("fill", 'rgba(255,0,255,0.0)')
+        .attr("stroke","#ffffff")
+        .attr("transform",
+          function (d) {
+            var coord = new Array();
+            
+            coord.push(d.geometry.coordinates[0]);
+            coord.push(d.geometry.coordinates[1]);
+
+            console.log(coord);
+            return "translate(" + projection(coord) + ")"
+          })  
+          .on('mouseover', universityTip.show)
+          .on('mouseout', universityTip.hide)
+          .on('click',function(event,d){
+            props.findnear(d.properties.name)
+            d3.select(".uni-tip").remove()
+          })
+          
+
+          var link = new Array();
+          for(var i =0;i<props.searchData.length;i++){
+            link.push({type: "LineString", coordinates: props.searchData[i]})
+          }
+          console.log(link)
+          chart
+            // Add the path
+            .selectAll("myPath")
+            .data(link)
+            .enter()
+            .append("path")
+            .attr("d", function(d){ return path(d)})
+            .style("fill", "none")
+            .style("stroke", "#CC6B76")
+            .style("stroke-width", 0.3)
+    }
+
+    console.log(`HAHHAHHAHAAHHA${props.searchData}`)
 
     })();
 
-  }, [props.scaleSend, props.selectCases, props.selectPolicy, props.selectVote, props.selectGunRate]
+  }, [props.scaleSend, props.selectCases, props.selectPolicy, props.selectVote, props.selectGunRate,props.selectCity,props.selectUni,props.searchData]
   )
 
 

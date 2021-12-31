@@ -6,9 +6,16 @@ function ControlBar(props) {
             {/* <div className="block">
                 <input type="text"/>
             </div> */}
+            {/* <div className="block">
+                <div>
+                    <input id="name" type="text" onChange={props.findnear} />
+                </div>
+                <div>
+                </div>
+            </div> */}
             <div className="block">
                 <div>
-                    <input type="checkbox" id="cases" checked={props.selectCases} />
+                    <input type="checkbox" id="cases" value={props.value} checked={props.selectCases} />
                     <label htmlFor="cases">
                         <div
                             className={"title-button"}
@@ -24,7 +31,7 @@ function ControlBar(props) {
             <div className="block">
                 <div>
 
-                    <input type="checkbox" id="policy" checked={props.selectPolicy}/>
+                    <input type="checkbox" id="policy" checked={props.selectPolicy} />
                     <label htmlFor="policy">
                         <div
                             className={"title-button"}
@@ -39,7 +46,7 @@ function ControlBar(props) {
             </div>
             <div className="block">
                 <div>
-                    <input type="checkbox" id="gunRate"  checked={props.selectGunRate}/>
+                    <input type="checkbox" id="gunRate" checked={props.selectGunRate} />
                     <label htmlFor="gunRate">
                         <div
                             className={"title-button"}
@@ -64,24 +71,34 @@ function ControlBar(props) {
                         </div>
                     </label>
                 </div>
-                <div>
-                </div>
+
             </div>
+
             <div className="block">
                 <div>
-                    <input type="checkbox" id="find" />
-                    <label htmlFor="find">
+                    <input type="checkbox" id="city" checked={props.selectCity} />
+                    <label htmlFor="city">
                         <div
-                            className={"title-button"}
-                            onClick={props.findnear}
+                            id="citylabel"
+                            className={"tiny-button"}
+                            onClick={props.clickEventsCity}
                         >
-                            <p>FIND</p >
+                            <p>CITY</p>
+                        </div>
+                    </label>
+                    <input type="checkbox" id="Uni" checked={props.selectUni} />
+                    <label htmlFor="Uni">
+                        <div
+                            id="Unilabel"
+                            className={"tiny-button"}
+                            onClick={props.clickEventsUni}
+                        >
+                            <p>COLLEGE</p>
                         </div>
                     </label>
                 </div>
-                <div>
-                </div>
             </div>
+
             <div className="block">
                 <div className="range">
                     {/* <input type="range" className="" onChange={props.scaleChange} /> */}

@@ -11,7 +11,7 @@ function Statistics(data) {
 
       // set the dimensions and margins of the graph
       const margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = 760 - margin.left - margin.right,
+        width = 500 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
       // append the svg object to the body of the page
@@ -75,7 +75,7 @@ function Statistics(data) {
               .datum(data)
               .attr("class", "line")  // I add the class line to be able to modify this line later on.
               .attr("fill", "none")
-              .attr("stroke", "steelblue")
+              .attr("stroke", "#a52723")
               .attr("stroke-width", 1.5)
               .attr("d", d3.line()
                 .x(function (d) { return x(d.date) })
@@ -136,7 +136,11 @@ function Statistics(data) {
   )
 
   return (
-    <div viewBox="0 0 960 600" className="usStatistics" ref={ref}></div>      //渲染了这个东西出来
+    <div className="down-chart-container">
+    <div className="chart-title">TITLE</div>
+    <div className="down-chart usStatistics" ref={ref}></div> 
+    <div className="down-chart-example"><img src="./time-line.svg" height="150px"/> </div>
+    </div>    //渲染了这个东西出来
   )
 }
 

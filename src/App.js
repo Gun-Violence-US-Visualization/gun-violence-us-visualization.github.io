@@ -4,6 +4,8 @@ import Mouse from './Mouse'
 import Title from './Title'
 import ControlBar from './ControlBar'
 import SubPage from './SubPage'
+import HelloMessage from './SearchBar';
+import ChartExample from './ChartExample'
 
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
   const [data3, setData3] = React.useState([]);
   const [data4, setData4] = React.useState([]);
   const [data5, setData5] = React.useState([]);
+
+  const [searchData, setSearchData] = React.useState(null);
 
   // const [select, setSelect] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -24,6 +28,9 @@ function App() {
   const [selectPolicy, setSelectPolicy] = React.useState(true);
   const [selectGunRate, setSelectGunRate] = React.useState(false);
   const [selectVote, setSelectVote] = React.useState(false);
+
+  const [selectCity, setSelectCity] = React.useState(true);
+  const [selectUni, setSelectUni] = React.useState(true);
 
 
   React.useEffect(() => {
@@ -58,6 +65,9 @@ function App() {
       setSelectGunRate(false)
       setSelectVote(false)
 
+      setSelectCity(true)
+      setSelectUni(true)
+
       setLoading(false);
 
       setScaleData(900);
@@ -65,6 +75,9 @@ function App() {
       setPace(12);
 
       setOffset([50, 50])
+
+      setSearchData(null)
+
     })();
   }, []);
 
@@ -104,7 +117,7 @@ function App() {
       // setSelectPolicy(true)
     } else {
       setSelectGunRate(true)
-      if(setSelectPolicy){
+      if (setSelectPolicy) {
         setSelectPolicy(false)
       }
     }
@@ -116,8 +129,8 @@ function App() {
       // setSelectGunRate(true)
     } else {
       setSelectPolicy(true)
-      if (selectGunRate){
-      setSelectGunRate(false)
+      if (selectGunRate) {
+        setSelectGunRate(false)
       }
     }
   }
@@ -138,33 +151,57 @@ function App() {
     }
   }
 
+  const selectChangeCity = () => {
+    if (selectCity) {
+      setSelectCity(false)
+    } else {
+      setSelectCity(true)
+    }
+  }
+
+  const selectChangeUni = () => {
+    if (selectUni) {
+      setSelectUni(false)
+    } else {
+      setSelectUni(true)
+    }
+  }
+
   //计算两点（经纬度坐标）相隔距离，返回距离单位为公里（KM）
-  function GetDistance( lat1,  lng1,  lat2,  lng2){
-    var radLat1 = lat1*Math.PI / 180.0;
-    var radLat2 = lat2*Math.PI / 180.0;
+  function GetDistance(lat1, lng1, lat2, lng2) {
+    var radLat1 = lat1 * Math.PI / 180.0;
+    var radLat2 = lat2 * Math.PI / 180.0;
     var a = radLat1 - radLat2;
-    var  b = lng1*Math.PI / 180.0 - lng2*Math.PI / 180.0;
-    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) + Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
-    s = s *6378.137 ;// EARTH_RADIUS
+    var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
+    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+    s = s * 6378.137;// EARTH_RADIUS
     s = Math.round(s * 10000) / 10000;
     return s;
   }
 
 
-  const findnear = () => {
-    var u="Princeton University"
+  const findnear = (u) => {
+    // var u="University of Tulsa"
     var result = new Array();
+    var find = false;
+    var findi = 0;
     for(var i=0;i<data5.length;i++){
       if(data5[i].properties.name == u){
-        for(var j=0;j<data3.length;j++){
-          if(GetDistance(data5[i].geometry.coordinates[1],data5[i].geometry.coordinates[0],data3[j].geometry.coordinates[1],data3[j].geometry.coordinates[0])<50){
-            result.push(data3[j].id)
-          }
-        }
+        find=true;
+        findi=i;
       }
     }
-    console.log(result)
-    return result;
+    if(find == false){
+      return false;
+    }else{
+      for(var j=0;j<data3.length;j++){
+        if(GetDistance(data5[findi].geometry.coordinates[1],data5[findi].geometry.coordinates[0],data3[j].geometry.coordinates[1],data3[j].geometry.coordinates[0])<500){
+          result.push([[data5[findi].geometry.coordinates[0], data5[findi].geometry.coordinates[1]], [data3[j].geometry.coordinates[0], data3[j].geometry.coordinates[1]]])
+        }
+      }
+      setSearchData(result)
+      return result;
+    }
   }
 
   console.log(`AppTrigger`)
@@ -189,12 +226,16 @@ function App() {
                     data1={data1}
                     data2={data2}
                     data3={data3}
-                    // data4={data4}
+                    data5={data5}
                     scaleSend={scaleData}
                     selectCases={selectCases}
                     selectPolicy={selectPolicy}
                     selectGunRate={selectGunRate}
                     selectVote={selectVote}
+                    selectCity={selectCity}
+                    selectUni={selectUni}
+                    searchData={searchData}
+                    findnear={findnear}
                     className="Map"
                   />}
                 </div>
@@ -202,15 +243,23 @@ function App() {
             )}
           </Mouse>
         </div>
+        <HelloMessage
+          data5={data5}
+          findnear={findnear}
+        />
         <ControlBar
           selectCases={selectCases}
           selectPolicy={selectPolicy}
           selectGunRate={selectGunRate}
           selectVote={selectVote}
+          selectCity={selectCity}
+          selectUni={selectUni}
           clickEventsCases={selectChangeCases}
           clickEventsPolicy={selectChangePolicy}
           clickEventsGunRate={selectChangeGunRate}
           clickEventsVote={selectChangeVote}
+          clickEventsCity={selectChangeCity}
+          clickEventsUni={selectChangeUni}
           // scaleChange={scaleChange}
           scaleBig={scaleBig}
           scaleSmall={scaleSmall}
@@ -221,18 +270,23 @@ function App() {
 
         {/* <Statistics/> */}
         {/* <Profile /> */}
-        
 
-        
-         <SubPage
+
+
+        <SubPage
           selectCases={selectCases}
           selectPolicy={selectPolicy}
           selectGunRate={selectGunRate}
           selectVote={selectVote}
-           />
+        />
         {/* </div> */}
 
-
+        <ChartExample
+          selectCases={selectCases}
+          selectPolicy={selectPolicy}
+          selectGunRate={selectGunRate}
+          selectVote={selectVote}
+        />
       </header>
     </div>
   );

@@ -10,8 +10,8 @@ function Correlation(data) {
         (async () => {
             // set the dimensions and margins of the graph
             const margin = { top: 10, right: 30, bottom: 30, left: 60 },
-                width = 560 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
+                width = 500 - margin.left - margin.right,
+                height = 400 - margin.top - margin.bottom;
 
             // append the svg object to the body of the page
             const svg = d3.select(".usCorrelation")
@@ -50,7 +50,7 @@ function Correlation(data) {
                     .call(d3.axisLeft(y));
 
                 // Color scale: give me a specie name, I return a color
-                const color = d3.scaleLinear().domain([-25,20])
+                const color = d3.scaleLinear().domain([-25, 20])
                     .range(["red", "blue"])
 
                 // Highlight the specie that is hovered
@@ -97,9 +97,9 @@ function Correlation(data) {
                     .data(data)
                     .enter()
                     .append("circle")
-                    .attr("class", function (d) {  return "dot " + d.rate })
-                    .attr("id", function (d) { console.log(d.state);  return "dot" + d.state })
-                    .attr("cx", function (d) {  return x(106 - d.policy); })
+                    .attr("class", function (d) { return "dot " + d.rate })
+                    .attr("id", function (d) { console.log(d.state); return "dot" + d.state })
+                    .attr("cx", function (d) { return x(106 - d.policy); })
                     .attr("cy", function (d) { return y(d.gunhold); })
                     .attr("r", 3)
                     .style("fill", function (d) { return color(d.rate); })
@@ -113,7 +113,11 @@ function Correlation(data) {
     )
 
     return (
-        <div viewBox="0 0 960 600" className="usCorrelation" ref={ref}></div>      //渲染了这个东西出来
+        <div className="down-chart-container">
+            <div className="chart-title">TITLE</div>
+            <div className="down-chart usCorrelation" ref={ref}></div>
+            <div className="down-chart-example"><img src="./party-relate.svg" height="120px"/> </div>
+        </div>   //渲染了这个东西出来
     )
 }
 

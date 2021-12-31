@@ -10,8 +10,8 @@ function Profile(data) {
     (async () => {
       // set the dimensions and margins of the graph
       const margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = 560 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 500 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
       // append the svg object to the body of the page
       const svg = d3.select(".usProfile")
@@ -52,7 +52,7 @@ function Profile(data) {
         // Color scale: give me a specie name, I return a color
         const color = d3.scaleOrdinal()
           .domain(["Black_Male", "Asian_Male", "White_Male", "Unknown_Male", "Unknown", "Unknown_Female", "White_Female", "Asian_Female", "Black_Female"])
-          .range(["#67001f", "#b2182b", "#ef8a62", "#fddbc7", "#ffffff", "#e0e0e0", "#e0e0e0", "#4d4d4d", "#1a1a1a"])
+          .range(["#67001f", "#b2182b", "#ef8a62", "#fddbc7", "#ffffff", "#e0e0e0", "#bababa", "#4d4d4d", "#1a1a1a"])
 
         // Highlight the specie that is hovered
         const highlight = function (event, d) {
@@ -117,8 +117,11 @@ function Profile(data) {
   }, [statesData.length]
   )
 
-  return (
-    <div className="usProfile" ref={ref}></div>      //渲染了这个东西出来
+  return (<div className="down-chart-container">
+  <div className="chart-title">TITLE</div>
+    <div className="down-chart usProfile" ref={ref}></div> 
+    <div className="down-chart-example"><img src="./profile.svg" height="150px"/> </div>
+    </div>     //渲染了这个东西出来
   )
 }
 
