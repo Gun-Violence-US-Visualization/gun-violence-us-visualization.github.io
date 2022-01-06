@@ -1,11 +1,12 @@
 import React from 'react';
-import Map from './Map';
-import Mouse from './Mouse'
-import Title from './Title'
-import ControlBar from './ControlBar'
-import SubPage from './SubPage'
-import HelloMessage from './SearchBar';
-import ChartExample from './ChartExample'
+import Map from './charts/Map';
+import Mouse from './components/Mouse'
+import Title from './widgets/Title'
+import ControlBar from './widgets/ControlBar'
+import SubPage from './widgets/SubPage'
+import SearchBar from './widgets/SearchBar';
+import ChartExample from './widgets/ChartExample'
+import UniTipBar from './widgets/UniTipBar'
 
 
 function App() {
@@ -16,7 +17,9 @@ function App() {
   const [data4, setData4] = React.useState([]);
   const [data5, setData5] = React.useState([]);
 
-  const [searchData, setSearchData] = React.useState(null);
+  const [uniData,setUniData] = React.useState([]);
+
+  const [searchData, setSearchData] = React.useState([]);
 
   // const [select, setSelect] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -29,22 +32,33 @@ function App() {
   const [selectGunRate, setSelectGunRate] = React.useState(false);
   const [selectVote, setSelectVote] = React.useState(false);
 
-  const [selectCity, setSelectCity] = React.useState(true);
+  const [selectCity, setSelectCity] = React.useState(false);
   const [selectUni, setSelectUni] = React.useState(true);
 
+  const [bigTitleIsShow, setBigTitleIsShow] = React.useState(1.0)
+
+  const [searchRange, setSearchRange] = React.useState(500.0)
+
+  const [selectSerious, setSelectSerious] = React.useState(false)
+  const [selectLowerRange, setSelectLowerRange] = React.useState(false)
+
+  const [searchInput, setSearchInput] = React.useState("")
+  // const [setIsChange,setSetIsChange]=React.useState(false)
+  const [searchState,setSearchState]=React.useState([false,false,""])
+  const [callUniTip,setCallUniTip] = React.useState(false)
 
   React.useEffect(() => {
     (async () => {
-      const res1 = await fetch('./policy.json')
+      const res1 = await fetch('./data/policy.json')
       const data1 = await res1.json();
       setData1(data1);
       console.log(data1.total);
 
-      const res2 = await fetch('./policy.json')
+      const res2 = await fetch('./data/policy.json')
       const data2 = await res2.json();
       setData2(data2);
 
-      const res3 = await fetch('./cases.geojson')
+      const res3 = await fetch('./data/cases.geojson')
       const data3Combine = await res3.json();
       const data3 = data3Combine.features;
       setData3(data3);
@@ -55,7 +69,7 @@ function App() {
 
       // setSelect([true, true, true, true])
 
-      const res5 = await fetch('./univercity.json')
+      const res5 = await fetch('./data/univercity.json')
       const data5Combine = await res5.json();
       const data5 = data5Combine.features;
       setData5(data5);
@@ -65,8 +79,11 @@ function App() {
       setSelectGunRate(false)
       setSelectVote(false)
 
-      setSelectCity(true)
+      setSelectCity(false)
       setSelectUni(true)
+
+      setSelectLowerRange(false)
+      setSelectSerious(false)
 
       setLoading(false);
 
@@ -76,7 +93,18 @@ function App() {
 
       setOffset([50, 50])
 
-      setSearchData(null)
+      setSearchData([])
+
+      setBigTitleIsShow(1.0)
+
+      setSearchRange(500.0)
+
+      setSearchInput("")
+
+      setSearchState([false,false,""])
+      setCallUniTip(false)
+
+      setUniData([])
 
     })();
   }, []);
@@ -84,7 +112,7 @@ function App() {
   const scaleBig = () => {
 
     // let scale = 900+(event.target.value-50)*15;
-    setScaleData(1300);
+    setScaleData(1400);
     setPace(1.5);
     console.log(scaleData)
     setOffset([250, 350])
@@ -107,7 +135,7 @@ function App() {
     setScaleData(900);
     setPace(12.0);
     console.log(scaleData)
-    setOffset([0, 0])
+    setOffset([50, 50])
 
   }
 
@@ -121,6 +149,7 @@ function App() {
         setSelectPolicy(false)
       }
     }
+    // setAnimation(true)
   }
 
   const selectChangePolicy = () => {
@@ -133,6 +162,7 @@ function App() {
         setSelectGunRate(false)
       }
     }
+    // setAnimation(true)
   }
 
   const selectChangeCases = () => {
@@ -167,6 +197,73 @@ function App() {
     }
   }
 
+  const selectChangeLowerRange = () => {
+    setSearchData([])
+
+    if (selectLowerRange) {
+      setSelectLowerRange(false)
+      setSearchRange(500.0)
+    } else {
+      setSelectLowerRange(true)
+      setSearchRange(200.0)
+      if (selectSerious) {
+        setSelectSerious(false)
+      }
+    }
+    // findnear(searchInput)
+  }
+
+  const selectChangeSerious = () => {
+    setSearchData([])
+    if (selectSerious) {
+      setSelectSerious(false)
+
+    } else {
+      setSelectSerious(true)
+      if (selectLowerRange) {
+        setSelectLowerRange(false)
+        setSearchRange(500.0)
+      }
+    }
+    // findnear(searchInput)
+    // console.log("second")
+
+  }
+
+  const reset = () => {
+    setSelectCases(true)
+    setSelectPolicy(true)
+    setSelectGunRate(false)
+    setSelectVote(false)
+
+    setSelectCity(false)
+    setSelectUni(true)
+
+    setSelectLowerRange(false)
+    setSelectSerious(false)
+
+    setLoading(false);
+
+    setScaleData(900);
+
+    setPace(12);
+
+    setOffset([50, 50])
+
+    setSearchData(null)
+
+    setBigTitleIsShow(1.0)
+
+    setSearchRange(500.0)
+    setSearchInput("")
+
+    setSearchState([false,false,""])
+    setCallUniTip(false)
+
+    setUniData([])
+    
+  }
+
   //计算两点（经纬度坐标）相隔距离，返回距离单位为公里（KM）
   function GetDistance(lat1, lng1, lat2, lng2) {
     var radLat1 = lat1 * Math.PI / 180.0;
@@ -179,73 +276,127 @@ function App() {
     return s;
   }
 
-
   const findnear = (u) => {
     // var u="University of Tulsa"
+    // console.log(`FuncTrigger`)
+
     var result = new Array();
+    var resultList = [0,0,0,0];
     var find = false;
     var findi = 0;
-    for(var i=0;i<data5.length;i++){
-      if(data5[i].properties.name == u){
-        find=true;
-        findi=i;
+    for (var i = 0; i < data5.length; i++) {
+      if (data5[i].properties.name == u) {
+        find = true;
+        findi = i;
       }
     }
-    if(find == false){
-      return false;
-    }else{
-      for(var j=0;j<data3.length;j++){
-        if(GetDistance(data5[findi].geometry.coordinates[1],data5[findi].geometry.coordinates[0],data3[j].geometry.coordinates[1],data3[j].geometry.coordinates[0])<500){
-          result.push([[data5[findi].geometry.coordinates[0], data5[findi].geometry.coordinates[1]], [data3[j].geometry.coordinates[0], data3[j].geometry.coordinates[1]]])
+    // console.log(`${searchRange}+${selectSerious}+${selectLowerRange}`)
+    if (find == false) {
+      return [];
+    } else {
+      if ((searchState[2])!=u){
+      setSearchInput(u)
+      setCallUniTip(true)
+      console.log(`input=${u}`)
+        // setSearchState([searchState[0],searchState[1],u])
+      }
+      console.log(`IfTrigger`)
+      for (var j = 0; j < data3.length; j++) {
+        if (GetDistance(data5[findi].geometry.coordinates[1], data5[findi].geometry.coordinates[0], data3[j].geometry.coordinates[1], data3[j].geometry.coordinates[0]) < searchRange) {
+          // resultList.push(data3[j])
+
+          if (parseInt(data3[j].properties.killed) + parseInt(data3[j].properties.injured) <5) {
+            resultList[0]+=1
+          }else if(parseInt(data3[j].properties.killed) + parseInt(data3[j].properties.injured) <10){
+            resultList[1]+=1
+          }else if(parseInt(data3[j].properties.killed) + parseInt(data3[j].properties.injured) <20){
+            resultList[2]+=1
+          }else{
+            resultList[3]+=1
+          }
+
+          if (selectSerious) {
+            // console.log(parseInt(data3[j].killed)+parseInt(data3[j].injured))
+            
+            if (parseInt(data3[j].properties.killed) + parseInt(data3[j].properties.injured) >= 20) {
+              result.push([[data5[findi].geometry.coordinates[0], data5[findi].geometry.coordinates[1]], [data3[j].geometry.coordinates[0], data3[j].geometry.coordinates[1]]])
+              
+            }
+          } else {
+            result.push([[data5[findi].geometry.coordinates[0], data5[findi].geometry.coordinates[1]], [data3[j].geometry.coordinates[0], data3[j].geometry.coordinates[1]]])
+          }
         }
       }
-      setSearchData(result)
-      return result;
+      if (searchState[3] != result){
+        setSearchData(result) 
+        setUniData(resultList)
+        console.log("resultSet")
+        return result;
+      }
     }
   }
 
-  console.log(`AppTrigger`)
+  // console.log(`AppTrigger`)
   // console.log(select[0])
 
   return (
     <div className="App">
       <header className="App-header" id="App-header">
-        <Title />
+        <Title
+          bigTitleIsShow={bigTitleIsShow}
+          reset={reset}
+        />
         <div className="HideOverFlow">
           <Mouse>
             {({ x, y }) => (
               <div className="Map-container">
                 <div
+                  className="MouseControl"
                   style={{
                     position: 'absolute',
                     top: -y / pace + offset[0],
                     left: -x / pace + offset[1]
                   }}>
                   {loading && <div>loading</div>}
-                  {!loading && <Map
-                    data1={data1}
-                    data2={data2}
-                    data3={data3}
-                    data5={data5}
-                    scaleSend={scaleData}
-                    selectCases={selectCases}
-                    selectPolicy={selectPolicy}
-                    selectGunRate={selectGunRate}
-                    selectVote={selectVote}
-                    selectCity={selectCity}
-                    selectUni={selectUni}
-                    searchData={searchData}
-                    findnear={findnear}
-                    className="Map"
-                  />}
+                  {!loading &&
+
+                    <Map
+                      data1={data1}
+                      data2={data2}
+                      data3={data3}
+                      data5={data5}
+                      scaleSend={scaleData}
+                      selectCases={selectCases}
+                      selectPolicy={selectPolicy}
+                      selectGunRate={selectGunRate}
+                      selectVote={selectVote}
+                      selectCity={selectCity}
+                      selectUni={selectUni}
+                      selectSerious={selectSerious}
+                      selectLowerRange={selectLowerRange}
+                      searchData={searchData}
+                      findnear={findnear}
+                      searchInput={searchInput}
+                      searchState={searchState}
+                      setSearchState={setSearchState}
+                    // setIsChange={setIsChange}
+                    // className="Map"
+                    />
+
+                  }
                 </div>
               </div>
             )}
           </Mouse>
         </div>
-        <HelloMessage
+        <SearchBar
           data5={data5}
           findnear={findnear}
+          selectSerious={selectSerious}
+          selectLowerRange={selectLowerRange}
+          clickEventsLower={selectChangeLowerRange}
+          clickEventsSerious={selectChangeSerious}
+        // setSearchInput={setSearchInput}
         />
         <ControlBar
           selectCases={selectCases}
@@ -268,17 +419,32 @@ function App() {
           findnear={findnear}
         />
 
+        <UniTipBar
+          data5={data5}
+          searchInput={searchInput}
+          callUniTip={callUniTip}
+          searchData={searchData}
+
+          selectSerious={selectSerious}
+          selectLowerRange={selectLowerRange}
+          uniData={uniData}
+        />
+
         {/* <Statistics/> */}
         {/* <Profile /> */}
 
+          <SubPage
+            selectCases={selectCases}
+            selectPolicy={selectPolicy}
+            selectGunRate={selectGunRate}
+            selectVote={selectVote}
+            setSelectCases={setSelectCases}
+            setSelectGunRate={setSelectGunRate}
+            setSelectPolicy={setSelectPolicy}
+            setSelectVote={setSelectVote}
 
-
-        <SubPage
-          selectCases={selectCases}
-          selectPolicy={selectPolicy}
-          selectGunRate={selectGunRate}
-          selectVote={selectVote}
-        />
+          // setBigTitleIsShow={setBigTitleIsShow}
+          />
         {/* </div> */}
 
         <ChartExample

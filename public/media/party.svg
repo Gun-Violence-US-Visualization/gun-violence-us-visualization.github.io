@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 632.8 256.5" style="enable-background:new 0 0 632.8 256.5;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E9E8E2;}
+	.st1{fill:#494949;}
+	.st2{fill:#E9E8E2;stroke:#CC6B76;stroke-width:17;stroke-miterlimit:10;}
+	.st3{fill:#E9E8E2;stroke:#6DBECC;stroke-width:17;stroke-miterlimit:10;}
+	.st4{font-family:'Futura-Medium';}
+	.st5{font-size:90.2992px;}
+</style>
+<g>
+	<path class="st0" d="M10.7,254.1c-4.5,0-8.2-3-8.2-6.7V9.2c0-3.7,3.7-6.7,8.2-6.7H622c4.5,0,8.2,3,8.2,6.7v238.2
+		c0,3.6-3.8,6.7-8.2,6.7H10.7z"/>
+	<path class="st1" d="M622,5c3.1,0,5.7,1.9,5.7,4.2v238.2c0,2-2.3,4.2-5.7,4.2H10.7c-3.1,0-5.7-1.9-5.7-4.2V9.2C5,6.9,7.6,5,10.7,5
+		H622 M622,0H10.7C4.8,0,0,4.1,0,9.2v238.2c0,5.1,4.8,9.2,10.7,9.2H622c5.9,0,10.7-4.2,10.7-9.2V9.2C632.7,4.1,627.9,0,622,0L622,0z
+		"/>
+</g>
+<rect x="111.9" y="39.3" class="st2" width="177.9" height="177"/>
+<rect x="348" y="39.6" class="st3" width="177.5" height="177.4"/>
+<text transform="matrix(1 0 0 1 164.9319 158.7406)" class="st1 st4 st5">R</text>
+<g>
+	<text transform="matrix(1 0 0 1 403.7737 158.7401)" class="st1 st4 st5">D</text>
+</g>
+</svg>
