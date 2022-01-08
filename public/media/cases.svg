@@ -10,12 +10,12 @@
 	.st4{fill:#E56249;}
 	.st5{fill:#CC3C31;}
 	.st6{fill:#FFFFFF;}
-	.st7{font-family:'Futura-Bold';}
+	.st7{font-family:'Montserrat-Bold';}
 	.st8{font-size:44.21px;}
 </style>
 <g>
 	<path class="st0" d="M9.9,254c-4.1,0-7.4-3.3-7.4-7.4V9.9c0-4.1,3.3-7.4,7.4-7.4H623c4.1,0,7.4,3.3,7.4,7.4v236.7
-		c0,4.1-3.3,7.4-7.4,7.4H9.9z"/>
+		c0,4.1-3.3,7.4-7.4,7.4L9.9,254L9.9,254z"/>
 	<path class="st1" d="M623,5c2.7,0,4.9,2.2,4.9,4.9v236.7c0,2.7-2.2,4.9-4.9,4.9H9.9c-2.7,0-4.9-2.2-4.9-4.9V9.9C5,7.2,7.2,5,9.9,5
 		H623 M623,0H9.9C4.4,0,0,4.4,0,9.9v236.7c0,5.5,4.4,9.9,9.9,9.9H623c5.5,0,9.9-4.4,9.9-9.9V9.9C632.9,4.4,628.5,0,623,0L623,0z"/>
 </g>
@@ -24,7 +24,7 @@
 <ellipse class="st4" cx="231.6" cy="123.2" rx="50" ry="50"/>
 <ellipse class="st5" cx="369.4" cy="123.2" rx="50" ry="50"/>
 <text transform="matrix(0.97 0 0 1 79.2871 140.5869)" class="st6 st7 st8">5</text>
-<text transform="matrix(0.97 0 0 1 202.2305 140.5869)" class="st6 st7 st8">10</text>
+<text transform="matrix(0.97 0 0 1 209.1348 140.5869)" class="st6 st7 st8">10</text>
 <text transform="matrix(0.97 0 0 1 341.627 140.5869)" class="st6 st7 st8">20</text>
-<text transform="matrix(0.97 0 0 1 475.0723 140.0474)" class="st6 st7 st8">&gt;20</text>
+<text transform="matrix(0.97 0 0 1 477.731 140.0474)" class="st6 st7 st8">&gt;20</text>
 </svg>

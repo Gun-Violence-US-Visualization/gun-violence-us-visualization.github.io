@@ -3,8 +3,7 @@ import React, { useState, useEffect, useLayoutEffect } from "react"
 class Content extends React.Component {
   render() {
     return <div className="search-bar-content">
-      <input className="search-bar" type="text" value={this.props.myDataProp} onChange={this.props.updateStateProp} placeholder="Search College" />
-      {/* {this.props.result.length>0 && <p className="number search-bar-number">{this.props.result.length}</p>} */}
+      <input id="searchBar" className="search-bar" type="text" value={this.props.myDataProp} onChange={this.props.updateStateProp} placeholder="Search College" />
     </div>;
   }
 }
@@ -24,7 +23,7 @@ class SearchBar extends React.Component {
 
   render() {
     var value = this.state.value;
-    var result = this.state.result;
+    // var result = this.state.result;
     return (<div className="search-bar-container">
 
       <div className="search-bar-set">
@@ -54,7 +53,7 @@ class SearchBar extends React.Component {
         {/* <img src="./media/setting.svg" height="95%"/> */}
       </div>
       {/* <div className="search-bar-spacer"></div> */}
-      <Content myDataProp={value} result={result}
+      <Content myDataProp={value}
         updateStateProp={this.handleChange}></Content>
     </div>);
   }

@@ -4,14 +4,25 @@ import * as d3 from "d3"
 function UniTipBar(props) {
     const ref = React.useRef(null)
     const [d, setD] = useState(null)
+    const [dName,setdName] = useState(null)
+    const [count,setCount] = useState(null)
 
     useEffect(() => {
+        (async () => {
         console.log(props.uniData)
         for (var i = 0; i < props.data5.length; i++) {
             if (props.data5[i].properties.name == props.searchInput) {
                 setD(props.data5[i].properties)
             }
         }
+        if(d.name) {
+        setdName(d.name)
+        }
+        if(props.searchData.length) {
+        setCount(props.searchData.length)
+        }
+
+        console.log(`UniNameIs${dName}`)
 
         const caseColor = d3.scaleLinear().domain([0, 1, 2, 3]).range(["#f2b59d", "#e56249", "#cc3c31", "#a52723"])
 
@@ -48,6 +59,8 @@ function UniTipBar(props) {
         })
 
 
+    })();
+
     }, [props.searchInput, props.uniData])
 
     return (
@@ -59,9 +72,9 @@ function UniTipBar(props) {
                         <svg viewBox="0 0 960 120" ref={ref} className="caseCircleLine" ></svg>
                     </div>
                     <p>
-                        <span className='name'>{d.name} </span>
+                        <span className='name important-font'>{dName} </span>
                         <br />
-                        <span className="huge"> {props.selectSerious && "HUGE"}</span><span> CASES in {props.selectLowerRange && "200km"}{!props.selectLowerRange && "500km"} </span><span className="count">{props.searchData.length}</span>
+                        <span className="huge important-font">{props.selectSerious && "HUGE"}</span><span> CASES in {props.selectLowerRange && "200km"}{!props.selectLowerRange && "500km"} </span><span className="count important-font">{count}</span>
                     </p>
                 </div>
             }

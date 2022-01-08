@@ -47,6 +47,8 @@ function App() {
   const [searchState,setSearchState]=React.useState([false,false,""])
   const [callUniTip,setCallUniTip] = React.useState(false)
 
+  // const [inputStart,setInputStart] = React.useState("")
+
   React.useEffect(() => {
     (async () => {
       const res1 = await fetch('./data/policy.json')
@@ -105,6 +107,8 @@ function App() {
       setCallUniTip(false)
 
       setUniData([])
+
+      // setInputStart('')
 
     })();
   }, []);
@@ -261,7 +265,7 @@ function App() {
     setCallUniTip(false)
 
     setUniData([])
-    
+    // setInputStart('')
   }
 
   //计算两点（经纬度坐标）相隔距离，返回距离单位为公里（KM）
@@ -297,6 +301,7 @@ function App() {
       if ((searchState[2])!=u){
       setSearchInput(u)
       setCallUniTip(true)
+      setSelectUni(true)
       console.log(`input=${u}`)
         // setSearchState([searchState[0],searchState[1],u])
       }
@@ -342,6 +347,25 @@ function App() {
   return (
     <div className="App">
       <header className="App-header" id="App-header">
+        
+        <div className="background-point-container">
+        {/* <Mouse>
+            {({ x, y }) => (
+                <div
+                  className="MouseControl"
+                  style={{
+                    position: 'absolute',
+                    top: y / 15,
+                    left: x / 15
+                  }}> */}
+                    <div className="background-point">
+                      
+                    </div>
+                {/* </div>
+              
+            )}
+        </Mouse> */}
+        </div>
         <Title
           bigTitleIsShow={bigTitleIsShow}
           reset={reset}
@@ -396,6 +420,7 @@ function App() {
           selectLowerRange={selectLowerRange}
           clickEventsLower={selectChangeLowerRange}
           clickEventsSerious={selectChangeSerious}
+          // inputStart={inputStart}
         // setSearchInput={setSearchInput}
         />
         <ControlBar

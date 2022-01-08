@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import * as d3 from "d3"
 
 function Case_sum(props) {
@@ -8,19 +8,33 @@ function Case_sum(props) {
     // const [var2, setVar2] = useState("Killed")
     // const [var3, setVar3] = useState("Injured")
     // console.log(data)
+    const [size, setSize] = useState({
+        width: document.documentElement.clientWidth,
+        hieght: document.documentElement.clientHeight
+      })
+    
+      const onResize = useCallback(() => {
+        setSize({
+          width: document.documentElement.clientWidth,
+          height: document.documentElement.clientHeight,
+        })
+      }, [])
 
     useEffect(() => {
         (async () => {
-
+            window.addEventListener('resize', onResize);
             // set the dimensions and margins of the graph
             const margin = { top: 100, right: 0, bottom: 0, left: 0 },
                 width = ref.current.clientWidth-30,
-                height = width*1.5 - margin.top - margin.bottom,
+                height = width*1.4 - margin.top - margin.bottom,
                 innerRadius = 150,
                 outerRadius = Math.min(width, height) / 2;   // the outerRadius goes from the middle of the SVG area to the border
 
-            // append the svg object
-            const svg = d3.select(".usCase_sum")
+                const svgEL = d3.select(ref.current);
+                svgEL.selectAll("*").remove();
+          
+                      // append the svg object to the body of the page
+                      const svg = svgEL
                 .append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
@@ -88,12 +102,15 @@ function Case_sum(props) {
                         .padRadius(innerRadius))
 
             });
+            return (() => {
+                window.removeEventListener('resize', onResize)
+              })
         })();
-    }, []
+    }, [statesData.length, size.width]
     )
     return (
         <div className="down-chart-container">
-  <div className="chart-title">TITLE</div>
+  <div className="chart-title">SUM of SHOOTING CASES in each STATE</div>
         <div viewBox="0 0 960 600" className="usCase_sum" ref={ref}></div>
         </div>
     )

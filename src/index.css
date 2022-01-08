@@ -1,11 +1,30 @@
 @font-face {
-    font-family: 'futura-Medium'; 
-     src: url(./static/FuturaBT-Medium.OTF);
+    font-family: 'normal'; 
+     src: url(./static/Montserrat-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'important'; 
+     src: url(./static/Montserrat-Black.ttf);
 }
 
 *{
-    font-family:'futura-Medium';
-    font-size:10pt;   
+    font-family:'normal';
+    font-size:10pt; 
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */  
+}
+
+.important-font{
+    font-family:'important';
+}
+
+::-webkit-scrollbar {
+
+    display: none;
+    overflow-x: hidden;
+    vertical-align: bottom;
+
 }
 
 body{
@@ -17,14 +36,21 @@ body{
 
 .Big-title{
     /* margin:40px; */
-    
+    /* width: 100%; */
     /* font-weight: bold; */
     color: #a52723;
     position: fixed;
+    top:1.5vh;
     z-index: 20;
-    pointer-events: none;
+    /* pointer-events: none; */
     /* width: 50vw; */
     z-index: 1;
+    opacity: 1.0;
+    
+}
+
+.Big-title:hover img{
+    opacity: 0.85;
 }
 
 .reset-button{
@@ -32,8 +58,9 @@ body{
     border:0;
     height: 40px;
     width:40px;
-    position: relative;
-    left: 10px;
+    position: absolute;
+    /* left: 10px; */
+    top:-3.9px;
     opacity: 1.0;
     pointer-events: initial;
 }
@@ -59,13 +86,21 @@ h1{
     font-size:14pt;
     margin: 0;
     position: relative;
-    left: 5px;
-    top:-6px;
+    left: 3px;
+    top:-20px;
     font-weight:bold;
+    /* border-top:5px solid #a52723; */
 }
 
-.Big-title-text{
-    font-size:36pt;
+.Big-title-text-line1{
+    font-size:20pt;
+    /* color: #494949; */
+}
+
+.Big-title-text-line2{
+    font-size:48pt;
+    position: relative;
+    top: -15px;
 }
 
 .HideOverFlow{
@@ -122,7 +157,7 @@ h1{
 
 
 .case{
-    cursor: pointer;
+    /* cursor: pointer; */
     /* fill: #ff822e; */
     opacity: 0.8;
     transition: ease-in-out 0.2s;
@@ -142,7 +177,7 @@ h1{
     /* display: inline-block; */
     /* width:90%; */
     /* height:2.7vh; */
-    border: #494949 1.5px solid;
+    border: #494949 2px solid;
     border-radius: 20px;
     background-color: #E9E8E2;
     text-align: left;
@@ -251,13 +286,18 @@ input[type="checkbox"]:checked + label .tiny-button p::before{
 
 .set-button{
     color: #ffffff;
+   
+}
+
+input[type="checkbox"] + label .set-button p{
+    font-size:12pt;
 }
 
 input[type="checkbox"] + label .set-button p::before{
     content: " ";
     display: inline-block;
-    width:0.75rem;
-    height: 0.75rem;
+    width:0.5rem;
+    height: 0.5rem;
     /* background-color: #ffffff; */
     border-radius:15px;
     border: 3px solid #ffffff;
@@ -319,14 +359,10 @@ input[type="checkbox"]{
 .search-bar-container{
     display: inline-block;
     text-align: right;
-    /* border: 2px solid #494949; */
-    /* border-radius: 32.0px; */
-    /* height: 50vh; */
-    /* width: 15vw; */
     position: fixed;
     /* min-width:210px; */
-    top: 3vh;
-    right: 3vh;
+    top: 2.5vh;
+    right: 1.2vw;
     font-size:16pt;
     /* max-width:315px; */
     z-index: 3;
@@ -373,7 +409,7 @@ input[type="checkbox"]{
     position: absolute;
     transition: ease-in-out 0.2s;
     min-width: 330px;
-    left: 50px;
+    left: 55px;
     text-align: left;
 }
 
@@ -456,9 +492,10 @@ input[type="checkbox"]{
     position: fixed;
     min-width:210px;
     top: 12vh;
-    right: 3vh;
+    right: 1.2vw;
     max-width:315px;
     z-index: 3;
+    color: #494949;
 }
 
 .control-bar:hover{
@@ -478,6 +515,7 @@ input[type="checkbox"]{
     background-color: #E9E8E2;
     position: relative;
     z-index: 2;
+
     
     /* height: 5vh; */
 }
@@ -486,9 +524,11 @@ input[type="checkbox"]{
     position: relative;
     z-index: 1;
     background-color: #E9E8E2;
-    width: 80vw;
+    background-image: url("./static/sub-background.svg");
+    object-fit: cover;
+    width: 100%;
     height: 88.8vh;
-    padding: 3vh;
+    padding: 2vw;
     padding-top: 5vh;
     padding-bottom: 5vh;
     /* height: 100%; */
@@ -644,10 +684,11 @@ input[type="checkbox"]:checked + label .SubPage-top-bar-title{
     width: 15vw;
     position: fixed;
     min-width:210px;
-    bottom: 3vw;
-    right: 3vh;
+    bottom: 2.5vh;
+    right: 1.2vw;
     max-width:315px;
     z-index: 3;
+    color: #494949;
     /* box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2); */
 }
 
@@ -660,7 +701,7 @@ input[type="checkbox"]:checked + label .SubPage-top-bar-title{
 }
 
 .state-name{
-    font-size:14pt;
+    font-size:18pt;
 }
 
 .chart-bar{
@@ -782,8 +823,8 @@ input[type="checkbox"]:checked + label .SubPage-top-bar-title{
 
 .chart-example{
     position:absolute;
-    left:3vh;
-    bottom:3vw;
+    left:1.2vw;
+    bottom:2.5vh;
 }
 
 .chart-example-single{
@@ -802,7 +843,8 @@ input[type="checkbox"]:checked + label .SubPage-top-bar-title{
 
 .universityTip{
     display: inline-block;
-    background-color:#E9E8E2;
+    background-color:#e9e8e2a8;
+    backdrop-filter:blur(5px);
     padding: 1.2rem;;
     text-align: center;
     border: 2px solid #494949;
@@ -819,6 +861,7 @@ input[type="checkbox"]:checked + label .SubPage-top-bar-title{
     z-index: 0;
     transform:translate(-50%);
     overflow: hidden;
+    color: #494949;
 }
 
 .universityTip p{
@@ -832,11 +875,11 @@ input[type="checkbox"]:checked + label .SubPage-top-bar-title{
 }
 
 .universityTip p .name{
-    font-size:12pt
+    font-size:16pt
 }
 
 .universityTip p .count{
-    font-size:16pt;
+    font-size:20pt;
     /* background-color:#a52723; */
     color:#a52723;
     /* padding: 0.1rem  0.5rem 0.1rem 0.5rem ; */
@@ -857,8 +900,28 @@ input[type="checkbox"]:checked + label .SubPage-top-bar-title{
     
 }
 
+.background-point-container{
+    position: absolute;
+    display: inline-block;
+    width: 100vw;
+    height: 100vh;
+}
+
+.background-point-container div{
+    width: 100%;
+    height: 100%;
+}
+
+.background-point{
+    width: 100%;
+    height: 100%;
+    background-image: url("./static/background.svg");
+    object-fit: cover;
+    opacity: 0.3;
+}
+
 .down-chart-container{
-    width: 40%;
+    width: 32vw;
     /* height:600px; */
     display: inline-block;
     border: #494949 2px solid;
@@ -870,6 +933,7 @@ input[type="checkbox"]:checked + label .SubPage-top-bar-title{
     /* top:0; */
     /* baseline: top; */
     overflow: hidden;
+    background-color: #E9E8E2;
 }
 
 .down-chart-container:hover{
@@ -878,10 +942,24 @@ box-shadow: 0 0 7px 3px rgba(100, 100, 100, 0.3);
 
 .down-chart-container p{
     text-align: left;
+    font-size:12pt;
+}
+
+.down-chart-container li{
+    text-align: left;
+    font-size:12pt;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.wider{
+    width: 70vw;
 }
 
 .chart-title{
     /* display: inline-block; */
+    position: relative;
+    /* top:-2vw; */
     text-align: center;
     font-size: 1.4rem;
     text-align: left;

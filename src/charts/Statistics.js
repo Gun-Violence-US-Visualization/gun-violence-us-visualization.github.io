@@ -1,21 +1,37 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import * as d3 from "d3"
 
 function Statistics(data) {
   const [statesData, setStatesData] = useState([]);     //react用来注释数据
   const ref = React.useRef(null)
+  const [size, setSize] = useState({
+    width: document.documentElement.clientWidth,
+    hieght: document.documentElement.clientHeight
+  })
+
+  const onResize = useCallback(() => {
+    setSize({
+      width: document.documentElement.clientWidth,
+      height: document.documentElement.clientHeight,
+    })
+  }, [])
+
   // console.log(data)
 
   useEffect(() => {
     (async () => {
 
+      window.addEventListener('resize', onResize);
       // set the dimensions and margins of the graph
       const margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = ref.current.clientWidth-30,
+        width = ref.current.clientWidth - 30,
         height = 400 - margin.top - margin.bottom;
 
+      const svgEL = d3.select(ref.current);
+      svgEL.selectAll("*").remove();
+
       // append the svg object to the body of the page
-      const svg = d3.select(".usStatistics")
+      const svg = svgEL
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -131,15 +147,19 @@ function Statistics(data) {
                 )
             });
           })
+      return (() => {
+        window.removeEventListener('resize', onResize)
+      })
+
     })();
-  }, [statesData.length]
+  }, [statesData.length, size.width]
   )
 
   return (
-    <div className="down-chart-container">
-    <div className="chart-title">TITLE</div>
-    <div className="down-chart usStatistics" ref={ref}></div> 
-    <div className="down-chart-example"><img src="./media/time-line.svg" width="95%"/> </div>
+    <div className="down-chart-container wider">
+      <div className="chart-title">SHOOTING CASES in TIMELINE</div>
+      <div className="down-chart usStatistics" ref={ref}></div>
+      {/* <div className="down-chart-example"><img src="./media/time-line.svg" width="95%"/> </div> */}
     </div>    //渲染了这个东西出来
   )
 }

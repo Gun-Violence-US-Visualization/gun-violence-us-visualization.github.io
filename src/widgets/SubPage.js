@@ -60,7 +60,7 @@ function SubPage(props) {
         {show && <div className="SubPage">
 
             {show && 
-            <ScrollToButton buttonClass="learn-more" toId="Detail">LEARN MORE</ScrollToButton>
+            <ScrollToButton buttonClass="learn-more important-font" toId="Detail">LEARN MORE</ScrollToButton>
 
             }
 
@@ -91,23 +91,26 @@ function SubPage(props) {
                 {/* </div> */}
                 <div>
                     {/* <Statistics/> */}
-                    {show==1 && <div><Profile /> <Statistics /></div>}
+                    {show==1 && <div> 
+                        <Statistics />
+                        <Profile />
+                        <Conclusion
+                            details1={"自2010年起至今，案件数量明显增多。"}
+                            details2={"持枪射击者画像显示：白人男性占比最高，其次为黑人男性，女性罪犯占比较少。"}
+                        />
+                        
+                    </div>}
                     {show==2 && <div>
                         <Data_sum/>
                         <Case_sum/>
                         <Correlation/>
                         <Conclusion
-                            details={"政党、法律与持枪政策：三者有显著或较显著相关关系。民主党支持率高的州（蓝州），持枪政策更严格，共和党州（红州）则反之（Cov = 0.58， p < 0.01）。蓝州相对红州持枪率也更低（Cov = 0.6, p < 0.01）。持枪政策越严格的州持枪率更低（Cov = 0.8, p < 0.01）。"}
+                            details1={"政党、法律与持枪政策：三者有显著或较显著相关关系。"}
+                            details2={"民主党支持率高的州（蓝州），持枪政策更严格，共和党州（红州）则反之（γ = 0.58， p < 0.01）。"}
+                            details3={"蓝州相对红州持枪率也更低（γ = 0.6, p < 0.01）。持枪政策越严格的州持枪率更低（γ = 0.8, p < 0.01）。"}
                         />
-                        
-                        {/* <div></div> */}
                     </div>}
-                    {/* {show==3 && <Profile />} */}
                 </div>
-                {/* {show==1 && <div className="conclusion"><p>{" "}</p></div>} */}
-                {/* {show==2 && } */}
-                {/* <div className="spacer"></div> */}
-                
             </div>         
             }
 
@@ -118,7 +121,7 @@ function SubPage(props) {
             {show && 
             <div className="SubPage-bar-container">
                 <div className="SubPage-foot-bar">
-                <ScrollToButton buttonClass="back-to-top" toId="App-header">Back To TOP</ScrollToButton>
+                <ScrollToButton buttonClass="back-to-top important-font" toId="App-header">Back To TOP</ScrollToButton>
                 </div>
                 <div  className="SubPage-top-bar">    </div>
             </div>

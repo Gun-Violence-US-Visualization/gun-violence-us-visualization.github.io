@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import * as d3 from "d3"
 
 function Profile(data) {
@@ -7,9 +7,21 @@ function Profile(data) {
   const [statesData, setStatesData] = useState([]);     //react用来注释数据
   const ref = React.useRef(null)
   // console.log(data)
+  const [size, setSize] = useState({
+    width: document.documentElement.clientWidth,
+    hieght: document.documentElement.clientHeight
+})
+
+const onResize = useCallback(() => {
+    setSize({
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight,
+    })
+}, [])
 
   useEffect(() => {
     (async () => {
+      window.addEventListener('resize', onResize);
       // set the dimensions and margins of the graph
 
       const formatter = d3.format(".0%");
@@ -18,8 +30,11 @@ function Profile(data) {
         width = ref.current.clientWidth-30,
         height = 400 - margin.top - margin.bottom;
 
-      // append the svg object to the body of the page
-      const svg = d3.select(".usProfile")
+        const svgEL = d3.select(ref.current);
+        svgEL.selectAll("*").remove();
+
+        // append the svg object to the body of the page
+        const svg = svgEL
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -118,12 +133,15 @@ function Profile(data) {
           .on("mousemove", mousemove)
           svg.append('g')
       })
-    })();
-  }, [ref]
+      return (() => {
+        window.removeEventListener('resize', onResize)
+    })
+})();
+}, [statesData.length, size.width]
   )
 
   return (<div className="down-chart-container">
-  <div className="chart-title">TITLE</div>
+  <div className="chart-title">PROFILE of SHOOTERS</div>
     <div className="down-chart usProfile" ref={ref}></div> 
     <div className="down-chart-example"><img src="./media/profile.svg" width="95%"/> </div>
     </div>     //渲染了这个东西出来

@@ -18,14 +18,12 @@ function ControlBar(props) {
                     <input type="checkbox" id="cases" value={props.value} checked={props.selectCases} />
                     <label htmlFor="cases">
                         <div
-                            className={"title-button"}
+                            className="title-button"
                             onClick={props.clickEventsCases}
                         >
-                            <p>CASES</p>
+                            <p className="important-font">CASES</p>
                         </div>
                     </label>
-                </div>
-                <div>
                 </div>
             </div>
             <div className="block">
@@ -34,14 +32,12 @@ function ControlBar(props) {
                     <input type="checkbox" id="policy" checked={props.selectPolicy} />
                     <label htmlFor="policy">
                         <div
-                            className={"title-button"}
+                            className="title-button"
                             onClick={props.clickEventsPolicy}
                         >
-                            <p>POLICY</p>
+                            <p className="important-font">POLICY</p>
                         </div>
                     </label>
-                </div>
-                <div>
                 </div>
             </div>
             <div className="block">
@@ -49,14 +45,12 @@ function ControlBar(props) {
                     <input type="checkbox" id="gunRate" checked={props.selectGunRate} />
                     <label htmlFor="gunRate">
                         <div
-                            className={"title-button"}
+                            className="title-button"
                             onClick={props.clickEventsGunRate}
                         >
-                            <p>GUN RATE</p>
+                            <p className="important-font">GUN HOLD</p>
                         </div>
                     </label>
-                </div>
-                <div>
                 </div>
             </div>
             <div className="block">
@@ -64,16 +58,14 @@ function ControlBar(props) {
                     <input type="checkbox" id="vote" checked={props.selectVote} />
                     <label htmlFor="vote">
                         <div
-                            className={"title-button"}
+                            className="title-button"
                             onClick={props.clickEventsVote}
                         >
-                            <p>VOTE</p>
+                            <p className="important-font">VOTE</p>
                         </div>
                     </label>
                 </div>
-
             </div>
-
             <div className="block tiny-button-container">
                 <div>
                     <input type="checkbox" id="city" checked={props.selectCity} />

@@ -58,27 +58,27 @@ function Map(props) {
           if (casesData.properties.guntype == null) {
             return (
               "<div class='caseTip'>" +
-              "<span class='kill-number'>" + casesData.properties.killed + "</span>"
+              "<span class='kill-number important-font'>" + casesData.properties.killed + "</span>"
               + "<span>KILL</span>"
-              + "<span class='injure-number'>" + casesData.properties.injured + "</span>"
+              + "<span class='injure-number important-font'>" + casesData.properties.injured + "</span>"
               + "<span>INJURE</span><br>"
-              + "<span>" + casesData.properties.state.toUpperCase() + " " + "</span><br>"
+              + "<span class='important-font'>" + casesData.properties.state.toUpperCase() + " " + "</span><br>"
               + "<span>" + casesData.properties.city + "</span><br>"
-              + "<span>" + casesData.properties.year + "-" + casesData.properties.month + "-" + casesData.properties.day + "</span><br>"
+              + "<span class='important-font'>" + casesData.properties.year + "-" + casesData.properties.month + "-" + casesData.properties.day + "</span><br>"
               + "</div>"
             )
           } else {
             return (
               "<div class='caseTip'>" +
-              "<span class='kill-number'>" + casesData.properties.killed + "</span>"
+              "<span class='kill-number important-font'>" + casesData.properties.killed + "</span>"
               + "<span>KILL</span>"
-              + "<span class='injure-number'>" + casesData.properties.injured + "</span>"
+              + "<span class='injure-number important-font'>" + casesData.properties.injured + "</span>"
               + "<span>INJURE</span><br>"
-              + "<span>" + casesData.properties.state.toUpperCase() + " " + "</span><br>"
+              + "<span class='important-font'>" + casesData.properties.state.toUpperCase() + " " + "</span><br>"
               + "<span>" + casesData.properties.city + "</span><br>"
-              + "<span>" + casesData.properties.year + "-" + casesData.properties.month + "-" + casesData.properties.day + "</span><br>"
+              + "<span  class='important-font'>" + casesData.properties.year + "-" + casesData.properties.month + "-" + casesData.properties.day + "</span><br>"
               + "<span>" + " " + "</span><br>"
-              + "<span>GUN</span><br> <span>" + casesData.properties.guntype + "</span>"
+              + "<span  class='important-font'>GUN</span><br> <span>" + casesData.properties.guntype + "</span>"
               + "</div>"
             )
           }
@@ -127,12 +127,12 @@ function Map(props) {
 
             + "<div class='state-detail'>"
 
-            + "<span class='state-name'>" + state.toUpperCase() + "</span><br>"
+            + "<span class='state-name important-font'>" + state.toUpperCase() + "</span><br>"
 
             + "<div class='tip-spacer'></div>"
 
           
-            + "<span class='kill-number "+ vote +" '>" +" " +rate + "%" + "</span>"+ "<span>"+party+"</span>"+"<br>"
+            + "<span class='kill-number "+ vote +" important-font'>" +" " +rate + "%" + "</span>"+ "<span>"+party+"</span>"+"<br>"
             // + "<span class='kill-number special'>" + props.data1[state].college + "</span>"+ "<span>COLLEGE</span><br>"
 
             // + "<span class='state-name'>" + state.toUpperCase() + "</span>"
@@ -303,6 +303,7 @@ function Map(props) {
             d3.select(this).style("fill", "#CC6B76");
             
           }
+          // stateTip.show()
           // }
         }
         )
@@ -322,11 +323,12 @@ function Map(props) {
             color = "#E9E8E2"
           }
           d3.select(this).style("fill", color);
+          // stateTip.hide();
           
         }
         )
+        // .on("mouseenter",function(d) {stateTip.style("opacity", 1);})
         .on("mouseenter",stateTip.show)
-        .on("click",stateTip.show)
 
       // console.log("INtrigger")
 
