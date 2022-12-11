@@ -1,1 +1,0 @@
-export { scrollTo } from "./scrollTo";

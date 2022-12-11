@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Gun_Violence_US_Visualization/static/css/main.20ff8355.css",
+    "main.js": "/Gun_Violence_US_Visualization/static/js/main.f90f8248.js",
+    "static/media/Montserrat-Black.ttf": "/Gun_Violence_US_Visualization/static/media/Montserrat-Black.46e8b3d6aad654578958.ttf",
+    "static/media/sub-background.svg": "/Gun_Violence_US_Visualization/static/media/sub-background.c7a36e8a11368c2b4bda.svg",
+    "static/media/Montserrat-Bold.ttf": "/Gun_Violence_US_Visualization/static/media/Montserrat-Bold.079ca05d3ded9bc107ab.ttf",
+    "static/media/background.svg": "/Gun_Violence_US_Visualization/static/media/background.97a518a8a25b2c21b46e.svg",
+    "index.html": "/Gun_Violence_US_Visualization/index.html",
+    "main.20ff8355.css.map": "/Gun_Violence_US_Visualization/static/css/main.20ff8355.css.map",
+    "main.f90f8248.js.map": "/Gun_Violence_US_Visualization/static/js/main.f90f8248.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.20ff8355.css",
+    "static/js/main.f90f8248.js"
+  ]
+}
