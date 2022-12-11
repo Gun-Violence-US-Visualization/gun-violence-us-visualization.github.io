@@ -1,7 +1,7 @@
 {
   "name": "gun-violence-us-visualization",
   "version": "0.1.0",
-  "homepage": "https://LuneRGB.github.io/Gun_Violence_US_Visualization",
+  "homepage": "https://gun-violence-us-visualization.github.io",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
