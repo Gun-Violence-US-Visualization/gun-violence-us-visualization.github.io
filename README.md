@@ -4,7 +4,7 @@ Xiang Li, Ruoxi Ning, Zhe Wang
 
 ## Preview Online
 
-Go to https://gun-violence-us-visualization.github.io/
+https://gun-violence-us-visualization.github.io
 
 Click on the labels at right-hand-side to change the views and click on the "Learn More" (if correct labels chosen) at the bottom to explore.
 
