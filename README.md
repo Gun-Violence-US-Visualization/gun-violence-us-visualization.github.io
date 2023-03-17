@@ -1,4 +1,5 @@
-# Gun_Violence_US_Visualization
+# Gun Violence in US Data Visualization Project
+
 Xiang Li, Ruoxi Ning, Zhe Wang
 
 ## Preview Online
@@ -9,13 +10,13 @@ Click on the labels at right-hand-side to change the views and click on the "Lea
 
 ## Run at Local
 
-根据package.json装对应库
+Install packages in package.json.
 
 ```shell
-npm install
+npm install [package name]
 ```
 
-终端输入
+After installation, run at terminal: 
 
 ```zsh
 npm start
